@@ -2,13 +2,22 @@
 const express = require('express')
 const app = express()
 var path = require("path");
+const chatRoutes = require('./routes/chat')
+const bodyParser = require('body-parser')
+
+const serverPort = process.env.PORT || 3000
+	
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use('/chat', chatRoutes)
+app.use(express.static(path.join(__dirname, 'public')))
 
 app.get('/', function(req, res){
 	res.sendFile(path.join(__dirname+'/public/index.html'));
 })
 
 app.listen(3000, function(){
-	console.log('app Listen at port 3000');
+	console.log('app Listen at port:' serverPort);
 })
  
 app.get('/mensagem', (req, res)	 =>  {
@@ -24,20 +33,5 @@ app.get('/mensagem', (req, res)	 =>  {
 
 	var context = {};
 
-	conversation.message({
-		workspace_id: '42893f0a-6c0e-4b66-8e30-525058a4322e',
-		input: {'text': req.query.texto},
-		context: context
-	}, function(err, response) {
-		if(err){
-			console.log('error:', err);
-			res.send(err);
-		}
-		else{
-			res.send({'resposta': response.output.text[0]});
-			//console.log(JSON.stringify(response, null, 2));
-		}
-	
-	});
 		
 });
