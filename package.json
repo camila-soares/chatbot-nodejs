@@ -1,0 +1,21 @@
+{
+  "name": "watson-conversation-node",
+  "version": "0.0.1",
+  "description": "Chatbot com nodeJs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "watson",
+    "conversation",
+    "robo",
+    "nodejs",
+    "expressjs"
+  ],
+  "author": "Camila Soares",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
